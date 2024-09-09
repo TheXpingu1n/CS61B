@@ -381,7 +381,7 @@ public class ArrayDeque61BTest {
         for (int i = 0; i < 8; i++) {
             test.removeFirst();
         }
-        assertThat(test.arr_size).isEqualTo(16);
+        assertThat(test.getarr()).isEqualTo(16);
     }
     @Test
     public void remove_last_trigger_resize()
@@ -393,7 +393,7 @@ public class ArrayDeque61BTest {
         for (int i = 0; i < 8; i++) {
             test.removeLast();
         }
-        assertThat(test.arr_size).isEqualTo(16);
+        assertThat(test.getarr()).isEqualTo(16);
     }
     @Test
     public void resize_up_and_resize_down()
@@ -405,10 +405,10 @@ public class ArrayDeque61BTest {
         for (int i = 0; i < 8; i++) {
             test.removeLast();
         }
-        assertThat(test.arr_size).isEqualTo(16);
+        assertThat(test.getarr()).isEqualTo(16);
         for (int i = 0; i < 4; i++) {
             test.removeFirst();
         }
-        assertThat(test.arr_size).isEqualTo(8);
+        assertThat(test.getarr()).isEqualTo(8);
     }
 }

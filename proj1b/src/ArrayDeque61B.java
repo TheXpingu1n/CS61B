@@ -8,10 +8,14 @@ public class ArrayDeque61B<T> implements Deque61B<T>
     private int tail;
     private int head;
     private double usageF;
-    public int arr_size;
+    private int arr_size;
     public ArrayDeque61B() {
         deque = (T[]) new Object[8];
         arr_size = this.deque.length;
+    }
+    public int getarr()
+    {
+       return arr_size;
     }
     @Override
     public void addFirst(T x)
