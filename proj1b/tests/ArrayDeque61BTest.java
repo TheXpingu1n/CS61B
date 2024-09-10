@@ -1,8 +1,10 @@
+import edu.princeton.cs.algs4.In;
 import jh61b.utils.Reflection;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -415,16 +417,21 @@ public class ArrayDeque61BTest {
     public void resize_up_and_resize_down_extreme()
     {
         ArrayDeque61B<Integer> test = new ArrayDeque61B();
+        ArrayDeque<Integer> d = new ArrayDeque<>();
         for (int i = 0; i < 100; i++) {
             test.addFirst(i);
+            d.addFirst(i);
         }
         for (int i = 0; i < 75; i++) {
             test.removeLast();
+            d.removeLast();
         }
        // assertThat(test.getarr()).isEqualTo();
         for (int i = 0; i < 13; i++) {
             test.removeFirst();
+            d.removeFirst();
         }
         assertThat(test.getarr()).isEqualTo(32);
+        assertThat(test.toList()).containsExactlyElementsIn(d).inOrder();
     }
 }
