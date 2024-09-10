@@ -411,4 +411,20 @@ public class ArrayDeque61BTest {
         }
         assertThat(test.getarr()).isEqualTo(8);
     }
+    @Test
+    public void resize_up_and_resize_down_extreme()
+    {
+        ArrayDeque61B<Integer> test = new ArrayDeque61B();
+        for (int i = 0; i < 100; i++) {
+            test.addFirst(i);
+        }
+        for (int i = 0; i < 75; i++) {
+            test.removeLast();
+        }
+       // assertThat(test.getarr()).isEqualTo();
+        for (int i = 0; i < 13; i++) {
+            test.removeFirst();
+        }
+        assertThat(test.getarr()).isEqualTo(32);
+    }
 }

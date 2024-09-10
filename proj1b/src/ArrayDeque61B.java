@@ -179,17 +179,13 @@ public class ArrayDeque61B<T> implements Deque61B<T>
         int start;
         this.arr_size = (int) (scale*this.deque.length);
         T[] newArray = (T[]) new Object[this.arr_size];
-        int temp = this.head;
+        int temp = this.deque.length-1;
         int part = (this.deque.length - this.head);
-        if(arr_size == 8)
-            start = -1*(this.arr_size - part);
-        else
-            start = (this.arr_size - part);
-
+        start = Math.floorMod((this.arr_size - part),this.arr_size);
         int cnt = 0;
-        for (int i = start; i < newArray.length; i++) {
+        for (int i = newArray.length-1; i >= start; i--) {
             newArray[i] = this.deque[temp];
-            temp++;
+            temp--;
             cnt++;
         }
         for (int i = 0; i < newArray.length; i++) {
