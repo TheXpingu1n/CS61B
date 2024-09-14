@@ -84,14 +84,15 @@ public class ArrayDeque61B<T> implements Deque61B<T>
             return null;
         size--;
         usageF = (double) this.size/this.deque.length;
-        if(usageF <= 0.25 && this.deque.length >= 16)
-        {
-            resize(0.5);
-        }
         T item = this.deque[head];
         head++;
         if(head >= this.deque.length)
             head = Math.floorMod(head,this.deque.length);
+        if(usageF <= 0.25 && this.deque.length >= 16)
+        {
+            resize(0.5);
+        }
+
         return item;
     }
 
@@ -179,27 +180,13 @@ public class ArrayDeque61B<T> implements Deque61B<T>
      } **/
     public void resize(double scale)
     {
-        int start;
-        this.arr_size = (int) (scale*this.deque.length);
-        T[] newArray = (T[]) new Object[this.arr_size];
-        int temp = this.deque.length-1;
-        int part = (this.deque.length - this.head);
-        start = Math.floorMod((this.arr_size - part),this.arr_size);
-        int cnt = 0;
-        for (int i = newArray.length-1; i >= start; i--) {
-            newArray[i] = this.deque[temp];
-            temp--;
-            cnt++;
+        arr_size = (int) ((int) deque.length*scale);
+        T[] newArray = (T[]) new Object[arr_size];
+        for (int i = 0; i < size; i++) {
+            newArray[i] = get(i);
         }
-        for (int i = 0; i < newArray.length; i++) {
-            newArray[i] = this.deque[i];
-            cnt++;
-            if(cnt >= size)
-            {
-                break;
-            }
-        }
-        this.head = start;
+        head = 0;
+        tail = size;
         this.deque = newArray;
     }
     @Override

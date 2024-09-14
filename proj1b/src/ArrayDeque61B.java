@@ -81,14 +81,15 @@ public class ArrayDeque61B<T> implements Deque61B<T>
             return null;
         size--;
         usageF = (double) this.size/this.deque.length;
-        if(usageF <= 0.25 && this.deque.length >= 16)
-        {
-            resize(0.5);
-        }
         T item = this.deque[head];
         head++;
         if(head >= this.deque.length)
             head = Math.floorMod(head,this.deque.length);
+        if(usageF <= 0.25 && this.deque.length >= 16)
+        {
+            resize(0.5);
+        }
+
         return item;
     }
 
@@ -122,81 +123,16 @@ public class ArrayDeque61B<T> implements Deque61B<T>
     public T getRecursive(int index) {
         throw new UnsupportedOperationException("No need to implement getRecursive for proj 1b");
     }
-   /** private void resizeUp()
-    {
-        this.arr_size = (int) (2*this.deque.length);
-        T[] newArray = (T[]) new Object[this.arr_size];
-        int portionFromHeadtoEnd = this.deque.length - this.head;
-        int start = this.arr_size - portionFromHeadtoEnd;
-        int tempHead = this.head;
-        int counter = 0;
-        for (int i = start; i < newArray.length; i++)
-        {
-            counter++;
-            newArray[i] = this.deque[tempHead];
-            tempHead++;
-        }
-        for (int i = 0; i < this.tail; i++) {
-            if(counter >= this.size)
-                break;
-            newArray[i] = this.deque[i];
-        }
 
-        this.head = start;
-        this.deque = newArray;
-    }
-   private void resizeDown()
-    {
-        int start;
-        this.arr_size = (int) (0.5*this.deque.length);
-        T[] newArray = (T[]) new Object[this.arr_size];
-        int temp = this.head;
-        int part = (this.deque.length - this.head);
-        if(arr_size == 8)
-            start = -1*(this.arr_size - part);
-        else
-            start = (this.arr_size - part);
-
-        int cnt = 0;
-        for (int i = start; i < newArray.length; i++) {
-            newArray[i] = this.deque[temp];
-            temp++;
-            cnt++;
-        }
-        for (int i = 0; i < newArray.length; i++) {
-            newArray[i] = this.deque[i];
-            cnt++;
-            if(cnt >= size)
-            {
-                break;
-            }
-        }
-        this.head = start;
-        this.deque = newArray;
-    } **/
     public void resize(double scale)
     {
-        int start;
-        this.arr_size = (int) (scale*this.deque.length);
-        T[] newArray = (T[]) new Object[this.arr_size];
-        int temp = this.deque.length-1;
-        int part = (this.deque.length - this.head);
-        start = Math.floorMod((this.arr_size - part),this.arr_size);
-        int cnt = 0;
-        for (int i = newArray.length-1; i >= start; i--) {
-            newArray[i] = this.deque[temp];
-            temp--;
-            cnt++;
+        arr_size = (int) ((int) deque.length*scale);
+        T[] newArray = (T[]) new Object[arr_size];
+        for (int i = 0; i < size; i++) {
+            newArray[i] = get(i);
         }
-        for (int i = 0; i < newArray.length; i++) {
-            newArray[i] = this.deque[i];
-            cnt++;
-            if(cnt >= size)
-            {
-                break;
-            }
-        }
-        this.head = start;
+        head = 0;
+        tail = size;
         this.deque = newArray;
     }
 }
