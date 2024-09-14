@@ -2,6 +2,10 @@ import jh61b.utils.Reflection;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
@@ -35,7 +39,9 @@ public class LinkedListDeque61BTest {
          Deque61B<String> lld1 = new LinkedListDeque61B<>();
 
          lld1.addLast("front"); // after this call we expect: ["front"]
+         assertThat(lld1.toList()).containsExactly("front").inOrder();
          lld1.addLast("middle"); // after this call we expect: ["front", "middle"]
+         assertThat(lld1.toList()).containsExactly("front", "middle").inOrder();
          lld1.addLast("back"); // after this call we expect: ["front", "middle", "back"]
          assertThat(lld1.toList()).containsExactly("front", "middle", "back").inOrder();
      }
@@ -74,6 +80,13 @@ public class LinkedListDeque61BTest {
     public void testSizeZero()
     {
         Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        lld1.addLast(1);
+        lld1.addLast(2);
+        lld1.addFirst(5);
+        lld1.removeFirst();
+        lld1.removeLast();
+        lld1.removeFirst();
+        lld1.removeLast();
         assertThat(lld1.size()).isEqualTo(0);
     }
     @Test
@@ -121,6 +134,13 @@ public class LinkedListDeque61BTest {
         assertThat(lld1.get(-1)).isNull();
     }
     @Test
+    public void testGetWithLargeIndex()
+    {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        lld1.addFirst(33);
+        assertThat(lld1.get(4)).isNull();
+    }
+    @Test
     public void testGetRWithValidIndex()
     {
         Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
@@ -148,6 +168,13 @@ public class LinkedListDeque61BTest {
         Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
         lld1.addFirst(33);
         assertThat(lld1.getRecursive(-1)).isNull();
+    }
+    @Test
+    public void testGetRWithLargeIndex()
+    {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        lld1.addFirst(33);
+        assertThat(lld1.getRecursive(4)).isNull();
     }
     @Test
     public void testRemoveFirst()
@@ -186,10 +213,67 @@ public class LinkedListDeque61BTest {
         lld1.addLast(23);
         //25,22,10,19,23
         lld1.removeLast();
-        lld1.removeFirst();
         lld1.removeLast();
-        lld1.removeFirst();
-        assertThat(lld1.toList()).containsExactly(10).inOrder();
+        lld1.removeLast();
+        lld1.removeLast();
+       // lld1.removeFirst();
+        assertThat(lld1.toList()).containsExactly(25).inOrder();
+    }
+    @Test
+    public void to_list_empty()
+    {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        ArrayList<Integer> lld2 = new ArrayList<>();
+        assertThat(lld1.toList()).containsExactlyElementsIn(lld2).inOrder();
+    }
+    @Test
+    public void to_list_nonempty()
+    {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        lld1.addLast(1);
+        lld1.addLast(2);
+        lld1.addLast(3);
+        assertThat(lld1.toList()).containsExactly(1,2,3).inOrder();
+    }
+    @Test
+    public void add_first_after_remove_to_empty()
+    {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        ArrayList<Integer> lld2 = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            lld1.addFirst(i);
+            lld2.addFirst(i);
+        }
+        for (int i = 0; i < 20; i++) {
+            lld1.removeFirst();
+            lld2.removeFirst();
+        }
+        for (int i = 0; i < 20; i++) {
+            lld1.addFirst(i);
+            lld2.addFirst(i);
+        }
+        assertThat(lld1.toList()).containsExactlyElementsIn(lld2).inOrder();
+    }
+    @Test
+    public void add_last_after_remove_to_empty()
+    {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        ArrayList<Integer> lld2 = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            lld1.addFirst(i);
+            lld2.addFirst(i);
+        }
+        assertThat(lld1.toList()).containsExactlyElementsIn(lld2).inOrder();
+        for (int i = 0; i < 20; i++) {
+            lld1.removeLast();
+            lld2.removeLast();
+        }
+        assertThat(lld1.toList()).containsExactlyElementsIn(lld2).inOrder();
+        for (int i = 0; i < 20; i++) {
+            lld1.addLast(i);
+            lld2.addLast(i);
+        }
+        assertThat(lld1.toList()).containsExactlyElementsIn(lld2).inOrder();
     }
 
 }

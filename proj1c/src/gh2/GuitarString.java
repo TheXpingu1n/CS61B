@@ -23,7 +23,7 @@ public class GuitarString {
         //       cast the result of this division operation into an int. For
         //       better accuracy, use the Math.round() function before casting.
         //       Your should initially fill your buffer with zeros.
-        buffer = new ArrayDeque61B<>();
+        buffer = new LinkedListDeque61B<>();
         int capacity = (int) Math.round(SR / frequency);
         for(int i = 0; i < capacity;i++)
         {
