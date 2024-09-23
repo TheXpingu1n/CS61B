@@ -103,6 +103,16 @@ public class UnionFindTest {
             assertThat(uf.parent(i)).isEqualTo(arr[i]);
         }
     }
+    @Test
+    public void unionVerticesWithSameSet()
+    {
+        UnionFind uf = new UnionFind(8);
+        uf.union(1,2);
+        uf.union(7,6);
+        uf.union(6,4);
+        uf.union(4,7);
+        assertThat(uf.find(4)).isEqualTo(uf.find(6));
+    }
 }
 
 
