@@ -1,5 +1,6 @@
 package ngrams;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -31,6 +32,20 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     public TimeSeries(TimeSeries ts, int startYear, int endYear) {
         super();
         // TODO: Fill in this constructor.
+        if(startYear >= MIN_YEAR && endYear <= MAX_YEAR) {
+            for (int i = startYear; i <= endYear; i++) {
+                if(ts.get(i) == null)
+                    continue;
+                this.put(i, ts.get(i));
+            }
+        }
+        else {
+            for (int i = MIN_YEAR; i <= MAX_YEAR; i++) {
+                if(ts.get(i) == null)
+                    continue;
+                this.put(i, ts.get(i));
+            }
+        }
     }
 
     /**
@@ -38,7 +53,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Integer> years() {
         // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.keySet());
     }
 
     /**
@@ -47,7 +62,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public List<Double> data() {
         // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.values());
     }
 
     /**
@@ -61,7 +76,17 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries plus(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        double res;
+        if(ts.isEmpty() && super.isEmpty())
+            return new TimeSeries();
+        TimeSeries newTime = new TimeSeries();
+        populateKeys(ts,newTime);
+        for(Integer i : newTime.keySet())
+        {
+            res = binarySearch(i,this) + binarySearch(i,ts);
+            newTime.put(i,res);
+        }
+        return newTime;
     }
 
     /**
@@ -75,9 +100,49 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries dividedBy(TimeSeries ts) {
         // TODO: Fill in this method.
-        return null;
+        if(!equalTSyears(this,ts))
+            throw new IllegalArgumentException();
+        Double res;
+        TimeSeries newMap = new TimeSeries();
+        for(Integer i : this.keySet())
+        {
+            if(!ts.containsValue(null) && !this.containsValue(null)) {
+                res = this.get(i) / ts.get(i);
+                newMap.put(i,res);
+            }
+        }
+        return newMap;
     }
 
     // TODO: Add any private helper methods.
     // TODO: Remove all TODO comments before submitting.
+    private double binarySearch(int key, TimeSeries ts)
+    {
+        Double res = ts.get(key);
+        if(res == null)
+            return 0;
+        return res;
+    }
+    private void populateKeys(TimeSeries ts, TimeSeries newTime)
+    {
+        for(Integer i : ts.keySet())
+        {
+            newTime.put(i,null);
+        }
+        for(Integer i : this.keySet())
+        {
+            newTime.put(i,null);
+        }
+    }
+    private boolean equalTSyears(TimeSeries ts1, TimeSeries ts2)
+    {
+        for(Integer i : ts1.keySet())
+        {
+            if(!ts2.containsKey(i))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
