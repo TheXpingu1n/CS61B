@@ -88,7 +88,16 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        Set<K> setOfKeys = new HashSet<>();
+        for (int i = 0; i < buckets.length; i++) {
+            if(buckets[i] == null)
+                continue;
+            for (Node j : buckets[i])
+            {
+                setOfKeys.add(j.key);
+            }
+        }
+        return setOfKeys;
     }
 
     /**
