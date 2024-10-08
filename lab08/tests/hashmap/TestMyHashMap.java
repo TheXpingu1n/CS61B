@@ -249,21 +249,21 @@ public class TestMyHashMap {
         assertThat(map.containsKey(b1)).isEqualTo(ref.containsKey(b1));
 
         Bee b2 = new Bee(2);
-        assertThat(map.containsKey(b2)).isEqualTo(ref.containsKey(b2));
-
+       assertThat(map.containsKey(b2)).isEqualTo(ref.containsKey(b2));
+//
         map.put(b2, 2);
         ref.put(b2, 2);
-        assertThat(map.get(b1)).isEqualTo(ref.get(b1));
+       assertThat(map.get(b1)).isEqualTo(ref.get(b1));
         assertThat(map.get(b2)).isEqualTo(ref.get(b2));
-        assertThat(map.containsKey(b1)).isEqualTo(ref.containsKey(b1));
+       assertThat(map.containsKey(b1)).isEqualTo(ref.containsKey(b1));
         assertThat(map.containsKey(b2)).isEqualTo(ref.containsKey(b2));
-
+//
         Bee b61 = new Bee(-61);
-        assertThat(map.get(b61)).isEqualTo(ref.get(b61));
+       assertThat(map.get(b61)).isEqualTo(ref.get(b61));
         assertThat(map.containsKey(b61)).isEqualTo(ref.containsKey(b61));
         assertThat(map.size()).isEqualTo(ref.size());
 
-        map.put(b61, -61);
+       map.put(b61, -61);
         ref.put(b61, -61);
         assertThat(map.get(b1)).isEqualTo(ref.get(b1));
         assertThat(map.get(b2)).isEqualTo(ref.get(b2));
