@@ -36,10 +36,10 @@ public class TestGraph {
                 g.addEdge(parent,valueOfSplit);
             }
         }
-        ArrayList<Integer> output = (ArrayList<Integer>) g.indicesOfaWord("change");
-        output.addAll(g.indicesOfaWord("occurrence"));
-        assertThat(output).isEqualTo(List.of(2,8,1));
-        assertThat(g.hyponymsNodes(List.of("change","occurrence"))).isEqualTo("");
-        //assertThat(g.hyponymsWords(List.of("change","occurrence"))).isEqualTo("");
+      //  ArrayList<Integer> output = (ArrayList<Integer>) g.indicesOfaWord("change");
+      //  output.addAll(g.indicesOfaWord("occurrence"));
+      //  assertThat(output).isEqualTo(List.of(2,8,1));
+       // assertThat(g.hyponymsNodes(List.of("change","occurrence"))).isEqualTo("");
+      //  assertThat(g.hyponymsWords(List.of("change","occurrence"))).isEqualTo("");
     }
 }

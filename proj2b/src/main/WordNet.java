@@ -8,7 +8,6 @@ public class WordNet {
     private Graph g;
     private In inSyn;
     private In inHyp;
-    private int words_needed;
     public WordNet(String synsets, String hyponyms)
     {
         inSyn = new In(synsets);
@@ -36,33 +35,18 @@ public class WordNet {
     }
     public List<String> Start(List<String> stream)
     {
-        words_needed = stream.size();
+        HashSet<HashSet<String>> setsOfWords = g.hyponymsWords(stream);
+        if(setsOfWords.isEmpty())
+            return new ArrayList<String>();
+        HashSet<String> result = new HashSet<>(setsOfWords.iterator().next());
+        for(HashSet<String> i : setsOfWords)
+        {
+            result.retainAll(i);
+        }
+        List<String> finalres = new ArrayList<>(result);
+        Collections.sort(finalres);
+        return finalres;
+    }
 
-        return CleanStart(words_needed,g.hyponymsWords(stream));
-    }
-    public List<String> CleanStart(int common, List<String> stream) {
-        HashMap<String, Integer> wordsWithRepitions = new HashMap<>();
-        for (int i = 0; i < stream.size(); i++) {
-            wordsWithRepitions.put(stream.get(i), 0);
-        }
-        for (String i : wordsWithRepitions.keySet())
-        {
-            for (String j : stream)
-            {
-                if(i.equals(j))
-                {
-                    wordsWithRepitions.put(i,wordsWithRepitions.get(i)+1);
-                }
-            }
-        }
-        List<String> cleaned_results = new ArrayList<>();
-        for(String i : wordsWithRepitions.keySet())
-        {
-            if(wordsWithRepitions.get(i) >= common)
-                cleaned_results.add(i);
-        }
-        Collections.sort(cleaned_results);
-        return cleaned_results;
-    }
 
 }

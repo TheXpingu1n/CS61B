@@ -1,7 +1,5 @@
 package main;
 
-import edu.princeton.cs.algs4.In;
-
 import java.util.*;
 
 public class Graph {
@@ -63,34 +61,36 @@ public class Graph {
    }
    public List<Integer> indicesOfaWord(String word)
    {
+       if(wordMap.get(word) == null)
+           return new ArrayList<>();
        return wordMap.get(word);
    }
-   public List<String> hyponymsWords(List<String> words)
+   public HashSet<HashSet<String>> hyponymsWords(List<String> words)
    {
-       ArrayList<String> NodeResult = hyponymsNodes(words);
-       ArrayList<String> UnCleanWordResult = new ArrayList<>();
-       for(String i : NodeResult)
-       {
-           String[] split = i.split(" ");
-           UnCleanWordResult.addAll(Arrays.asList(split));
-       }
-       return UnCleanWordResult;
+       HashSet<HashSet<String>> sets = new HashSet<>();
+      for(String j : words) {
+          ArrayList<String> NodeResult = hyponymsNodes(j);
+          HashSet<String> UnCleanWordResult = new HashSet<>();
+          for (String i : NodeResult) {
+              String[] split = i.split(" ");
+              UnCleanWordResult.addAll(Arrays.asList(split));
+          }
+          sets.add(UnCleanWordResult);
+      }
+       return sets;
    }
-   public ArrayList<String> hyponymsNodes(List<String> words)
+   public ArrayList<String> hyponymsNodes(String word)
    {
        ArrayList<Integer> indices = new ArrayList<>();
        ArrayList<String> Uncleaned_results = new ArrayList<>();
-       for (String i : words)
-       {
-           indices.addAll(indicesOfaWord(i));
-       }
+       indices.addAll(indicesOfaWord(word));
        for(Integer i : indices)
        {
            bfs(i,Uncleaned_results);
        }
        return Uncleaned_results;
    }
-   private ArrayList<String> bfs(int s, ArrayList<String> U_res)
+   private void bfs(int s, ArrayList<String> U_res)
    {
        Queue<Integer> fringe = new ArrayDeque<>();
        for (int i = 0; i < marked.length; i++) {
@@ -115,6 +115,5 @@ public class Graph {
            }
        }
 
-       return U_res;
    }
 }
