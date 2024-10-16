@@ -14,8 +14,8 @@ public class Main {
         String synsetFile = "./data/wordnet/synsets16.txt";
         String hyponymFile = "./data/wordnet/hyponyms16.txt";
         hns.startUp();
- //       hns.register("history", new DummyHistoryHandler());
-//        hns.register("historytext", new DummyHistoryTextHandler());
+        hns.register("history", new DummyHistoryHandler());
+        hns.register("historytext", new DummyHistoryTextHandler());
         WordNet wn = new WordNet(synsetFile,hyponymFile);
         hns.register("hyponyms", new HyponymsHandler(wn));
 
