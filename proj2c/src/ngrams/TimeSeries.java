@@ -1,5 +1,7 @@
 package ngrams;
 
+import edu.princeton.cs.algs4.In;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -112,6 +114,16 @@ public class TimeSeries extends TreeMap<Integer, Double> {
             }
         }
         return newMap;
+    }
+    public long totalCountsOfTimeSeries()
+    {
+        long totalCount = 0;
+        for(Integer i : this.keySet())
+        {
+            double getter = this.get(i);
+            totalCount += (long) getter;
+        }
+        return totalCount;
     }
 
     // TODO: Add any private helper methods.
