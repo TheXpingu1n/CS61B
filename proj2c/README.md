@@ -2,6 +2,7 @@ to make that work:
 **download data first**
 1- in main package run the main class 
 2- then open ngordnet.html (in static folder) into the browser  
+3- clone the library-sp24 and add it to the libraries from File -> Project Structure -> libraries and choose library-sp24 after cloning it
 
 and Voila!
 
