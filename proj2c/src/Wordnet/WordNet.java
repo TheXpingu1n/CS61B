@@ -33,6 +33,7 @@ public class WordNet {
                 g.addEdge(parent,valueOfSplit);
             }
         }
+        g.startingParents();
 
     }
     public List<String> Start(List<String> stream, NgordnetQueryType queryType)

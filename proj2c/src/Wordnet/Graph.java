@@ -8,6 +8,7 @@ public class Graph {
     private ArrayList<Integer>[] adjList;
     private ArrayList<String> Nodes;
     private HashMap<String,ArrayList<Integer>> wordMap;
+    private boolean[] NodesOfStarters;
     private boolean[] marked;
     private int[] edgeTo;
     private int Vsize;
@@ -19,7 +20,7 @@ public class Graph {
         edgeTo = new int[size];
         Nodes = new ArrayList<>();
         wordMap = new HashMap<>();
-
+        NodesOfStarters = new boolean[size];
     }
     public void addEdge(int s, int t)
     {
@@ -55,9 +56,22 @@ public class Graph {
    {
        for (int i = 0; i < nodes.size(); i++) {
            String[] split = nodes.get(i).split(" ");
-           for (int j = 0; j < split.length; j++) {
-               wordMap.computeIfAbsent(split[j], k -> new ArrayList<>());
-               wordMap.get(split[j]).add(i);
+           for (String s : split) {
+               wordMap.computeIfAbsent(s, k -> new ArrayList<>());
+               wordMap.get(s).add(i);
+           }
+       }
+   }
+   public void startingParents()
+   {
+       for (int i = 0; i < adjList.length ; i++) {
+           NodesOfStarters[i] = true;
+       }
+       for (ArrayList<Integer> integers : adjList) {
+           if (integers == null)
+               continue;
+           for (Integer integer : integers) {
+               NodesOfStarters[integer] = false;
            }
        }
    }
@@ -90,13 +104,19 @@ public class Graph {
        {
            if(qtype.equals(NgordnetQueryType.HYPONYMS))
            {
-               initializer();
+               initializer(0);
                bfs(i,Uncleaned_results);
            }
            else
            {
-               initializer();
-               dfs(0, i, Uncleaned_results);
+               for(int j=0; j < NodesOfStarters.length;j++)
+               {
+                   if(NodesOfStarters[j])
+                   {
+                       initializer(j);
+                       dfs(j, i, Uncleaned_results);
+                   }
+               }
            }
        }
        return Uncleaned_results;
@@ -170,10 +190,10 @@ public class Graph {
             U_res.add(Nodes.get(i));
         }
     }
-    private void initializer()
+    private void initializer(int start)
     {
         for (int i = 0; i < marked.length; i++) {
-            if (i == 0)
+            if (i == start)
             {
                 edgeTo[i] = -1;
                 marked[i] = false;
