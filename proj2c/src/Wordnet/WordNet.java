@@ -1,6 +1,7 @@
 package Wordnet;
 
 import Wordnet.Graph;
+import browser.NgordnetQueryType;
 import edu.princeton.cs.algs4.In;
 
 import java.util.*;
@@ -34,9 +35,9 @@ public class WordNet {
         }
 
     }
-    public List<String> Start(List<String> stream)
+    public List<String> Start(List<String> stream, NgordnetQueryType queryType)
     {
-        HashSet<HashSet<String>> setsOfWords = g.hyponymsWords(stream);
+        HashSet<HashSet<String>> setsOfWords = g.hyponymsWords(stream,queryType);
         if(setsOfWords.isEmpty())
             return new ArrayList<String>();
         HashSet<String> result = new HashSet<>(setsOfWords.iterator().next());

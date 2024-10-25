@@ -1,3 +1,4 @@
+import Wordnet.HyponymsHandler;
 import browser.NgordnetQuery;
 import browser.NgordnetQueryHandler;
 import browser.NgordnetQueryType;
@@ -27,4 +28,6 @@ public class TestOneWordKNot0Hyponyms {
     }
 
     // TODO: Add more unit tests (including edge case tests) here.
+
+
 }
