@@ -3,6 +3,7 @@ to make that work:
 1- in main package run the main class 
 2- then open ngordnet.html (in static folder) into the browser  
 3- clone the library-sp24 and add it to the libraries from File -> Project Structure -> libraries and choose library-sp24 after cloning it
+**************
 library-sp24::
 https://github.com/Berkeley-CS61B/library-sp24
 
