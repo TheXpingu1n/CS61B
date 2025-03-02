@@ -8,13 +8,19 @@ import java.util.*;
 public class GraphUG {
     private int[] rows = {-1, 0, 1, 0}; // Directions for moving in 4 directions.
     private int[] cols = {0, 1, 0, -1};
-
+    private Random rand = new Random();
     private TETile[][] grid;
     private Map<Integer, List<Point>> rooms; // Room ID → List of points
     private Set<Integer> connectedRooms = new HashSet<>();
     public GraphUG(TETile[][] grid) {
         this.grid = grid;
         rooms = new HashMap<>();
+        rand.setSeed(System.currentTimeMillis());
+    }
+    public GraphUG(TETile[][] grid,long seed) {
+        this.grid = grid;
+        rooms = new HashMap<>();
+        rand.setSeed(seed);
     }
 
     private boolean isValid(int x, int y) {
@@ -48,7 +54,7 @@ public class GraphUG {
     public void connectRooms() {
         // Pick a random room to start
         List<Integer> roomIds = new ArrayList<>(rooms.keySet());
-        Collections.shuffle(roomIds);
+        Collections.shuffle(roomIds,rand);
         int startRoom = roomIds.getFirst();
 
         // Mark the starting room as connected

@@ -23,6 +23,11 @@ public class Dungeon {
         random.setSeed(System.currentTimeMillis());
         tiles = new int[50][50];
     }
+    public Dungeon(long seed) {
+        random = new Random();
+        random.setSeed(seed);
+        tiles = new int[50][50];
+    }
     public BSPNode getRoot() {
         return root;
     }

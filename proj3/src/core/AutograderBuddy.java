@@ -18,9 +18,24 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-
-        throw new RuntimeException("Please fill out AutograderBuddy!");
-
+        StringBuilder st = new StringBuilder();
+        TETile[][] tiles = new TETile[50][50];
+        if(input.charAt(0) == 'n' || input.charAt(0) == 'N' &&
+                (input.charAt(input.length()-1) == 's' || input.charAt(input.length()-1) == 'S')) {
+            for(int i = 1; i < input.length()-1; i++) {
+                if(String.valueOf(input.charAt(i)).matches("[0-9]")) {
+                    st.append(input.charAt(i));
+                }
+            }
+        }
+        try {
+            long s = Long.parseLong(st.toString());
+            tiles = World.giveOutput(s);
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return tiles;
     }
 
 
