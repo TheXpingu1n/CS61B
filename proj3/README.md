@@ -47,3 +47,25 @@ it also used some functions to check validation and the type of the tile that th
   - ```TETile```
 
  --------------------------------------------------------------
+
+<h2>How to run?</h2>
+
+1. clone or download the project
+2. if you want to run, run from ```src.core.main```
+3. use
+```java
+World.start();
+```
+only for random generation every run, and use
+   ```java
+   Scanner sc = new Scanner(System.in);
+   System.out.println("Enter the seed: ");
+   String str = sc.nextLine();
+   TETile[][] tiles = AutograderBuddy.getWorldFromInput(str);
+    World.DisplayOutput(tiles);
+   ```
+   in ```main``` also to generate a world based on a given seed, the given seed must be inputted in the form of ```n####s``` where *####* is a number with type ```long```.
+
+------------------------------------------------------------------------------
+   
+***Note: don't forget to add the [```library-sp24```](https://github.com/Berkeley-CS61B/library-sp24) to the project to work properly without any errors.***
