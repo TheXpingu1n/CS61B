@@ -1,7 +1,7 @@
 <h1>A Random 2D Tiles world generation algorithm</h1>
 <h2>Algorithm: </h2>
 <h2>Classes used in the algorithm: </h2>
-- GraphUG: a class for graph that takes a TETile[][] grid array and optionally a long seed to connect rooms in the grid with corridors </br>
-- BSPNode: every object from this class represent a partition from the partitons in the grid </br>
+- GraphUG: a class for the graph that takes a TETile[][] grid array and optionally a long seed to connect rooms in the grid with corridors, uses hybrid dijkstra algorithm. </br>
+- BSPNode: every object from this class represents a partition from the partitions in the grid </br>
 - Dungeon: is the creator of the partitions and rooms in the grid, uses GridDrawer class methods to display what have it done on the screen </br>
 - GridDrawer: have all the methods to draw on the grid, **(e.g drawing a vertical line of Mountain Tiles)** </br>
