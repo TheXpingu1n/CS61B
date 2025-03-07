@@ -8,13 +8,13 @@ it also used some functions to check validation and the type of the tile that th
 
 ***Here are the steps for this Dijkstra-based algorithm***
 
-1- using ```GraphUG``` class, initialize with candidate cells using ```rooms``` map of the list of points of borders for each room and set the cost of floor and nothing tiles with 1 and walls with 2
+1. using ```GraphUG``` class, initialize with candidate cells using ```rooms``` map of the list of points of borders for each room and set the cost of floor and nothing tiles with 1 and walls with 2
 
-2- choose a random start point from a random room
+2. choose a random start point from a random room
 
-3- run randomized Dijkstra and crave a corridor using ```reconstructPath``` method between two rooms only if a new room is found
+3. run randomized Dijkstra and crave a corridor using ```reconstructPath``` method between two rooms only if a new room is found
 
-4- repeat Dijkstra on all of the grid points until all rooms are connected.
+4. repeat Dijkstra on all of the grid points until all rooms are connected.
 
 ------------------------------------------------------------------------
 <h2>Classes used in the algorithm</h2>
