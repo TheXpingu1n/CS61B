@@ -17,10 +17,13 @@ public class Main {
         // build your own world!
         // for seed based worlds, use World.giveOutput(long seed) then pass the output to World.DisplayOutput(TETile[][] tiles)
         // for pure randomly generated world, use World.start()
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the seed: ");
-        String str = sc.nextLine();
-        TETile[][] tiles = AutograderBuddy.getWorldFromInput(str);
-        World.DisplayOutput(tiles);
+
+
+        //Scanner sc = new Scanner(System.in);
+        //System.out.println("Enter the seed: ");
+        //String str = sc.nextLine();
+        //TETile[][] tiles = AutograderBuddy.getWorldFromInput(str);
+       // World.DisplayOutput(tiles);
+        World.start();
     }
 }

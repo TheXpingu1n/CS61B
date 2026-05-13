@@ -109,7 +109,7 @@ public class GraphUG {
         }
 
         // If there are still unconnected rooms, manually connect them
-        forceConnectRemainingRooms();
+        //forceConnectRemainingRooms();
     }
 
     private void reconstructPath(Point end, Map<Point, Point> parentMap) {
